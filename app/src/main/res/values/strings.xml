@@ -4,4 +4,19 @@
     <string name="gameIntro">This application gives you the Common Questions about Android Batch 12 has learned so far. Passing this quiz with different grades infers the level of your knowledge.</string>
     <string name="user_name">User Name</string>
     <string name="login">Log In</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="android_questions">
+        <item>Which one is not the support language in Android ?</item>
+        <item>Which one is the API level of Lollipop ?</item>
+        <item>Which of the following statements about Fragment is wrong?</item>
+    </string-array>
+
+
+    <string-array name="android_answers">
+        <item>C</item>
+        <item>14</item>
+        <item>Fragment can send data to other fragment directly.</item>
+    </string-array>
 </resources>
