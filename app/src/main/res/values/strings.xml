@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AndroidQuiz</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="gameIntro">This application gives you the Common Questions about Android Batch 12 has learned so far. Passing this quiz with different grades infers the level of your knowledge.</string>
+    <string name="user_name">User Name</string>
+    <string name="login">Log In</string>
+</resources>
