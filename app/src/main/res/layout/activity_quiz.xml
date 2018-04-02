@@ -1,31 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QuizActivity"
+    android:orientation="vertical"
     android:padding="10dp">
 
-    <fragment
+    <!--<fragment-->
+        <!--android:id="@+id/fragmentQuestion"-->
+        <!--android:name="com.rjt.android.androidquiz.QuestionFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--/>-->
+
+    <FrameLayout
         android:id="@+id/fragmentQuestion"
-        android:name="com.rjt.android.androidquiz.QuestionFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
 
-    <fragment
+
+
+    <!--<fragment-->
+        <!--android:id="@+id/fragmentChoice"-->
+        <!--android:layout_margin="30dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:name="com.rjt.android.androidquiz.ChoiceFragment"/>-->
+
+    <FrameLayout
         android:id="@+id/fragmentChoice"
         android:layout_margin="30dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fragmentQuestion"
-        android:name="com.rjt.android.androidquiz.ChoiceFragment"/>
+        android:layout_height="wrap_content" />
 
-    <fragment
+
+    <!--<fragment-->
+        <!--android:id="@+id/fragmentNext"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/fragmentChoice"-->
+        <!--android:name="com.rjt.android.androidquiz.NextFragment"/>-->
+
+    <FrameLayout
         android:id="@+id/fragmentNext"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fragmentChoice"
-        android:name="com.rjt.android.androidquiz.NextFragment"/>
-</RelativeLayout>
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

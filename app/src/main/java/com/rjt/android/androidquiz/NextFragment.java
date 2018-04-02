@@ -1,12 +1,14 @@
 package com.rjt.android.androidquiz;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -16,7 +18,8 @@ import android.view.ViewGroup;
  * to handle interaction events.
  */
 public class NextFragment extends Fragment {
-
+    private Button nextBtn;
+    private boolean nextPressed;
     private OnNextFragmentInteractionListener mListener;
 
     public NextFragment() {
@@ -28,14 +31,24 @@ public class NextFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_next, container, false);
-    }
+        View v =  inflater.inflate(R.layout.fragment_next, container, false);
+        nextBtn = v.findViewById(R.id.questionNxt);
+        nextBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                QuestionBank.incrementIndex();
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onNextFragmentInteraction(uri);
-        }
+                QuizActivity quizActivity = (QuizActivity)getActivity();
+                ChoiceFragment cfg = (ChoiceFragment)(getFragmentManager().findFragmentByTag(quizActivity.getQChoiceKey()));
+                String answer = cfg.get
+                if(QuestionBank.getQuestionNum()==QuestionBank.getQuestionIndex()){
+                    Intent intent = new Intent(getActivity(), ScoreActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+        });
+        return v;
     }
 
     @Override

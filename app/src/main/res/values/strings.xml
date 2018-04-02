@@ -11,12 +11,36 @@
         <item>Which one is not the support language in Android ?</item>
         <item>Which one is the API level of Lollipop ?</item>
         <item>Which of the following statements about Fragment is wrong?</item>
+        <item>Which is a sausage like banana?</item>
     </string-array>
-
 
     <string-array name="android_answers">
         <item>C</item>
         <item>14</item>
         <item>Fragment can send data to other fragment directly.</item>
+        <item>dick</item>
     </string-array>
+
+    <string-array name="android_choices">
+        <item>abcd</item>
+        <item>23</item>
+        <item>kajsdf</item>
+        <item>99</item>
+
+        <item>abcd</item>
+        <item>23</item>
+        <item>kajsdf</item>
+        <item>99</item>
+
+        <item>abcd</item>
+        <item>23</item>
+        <item>kajsdf</item>
+        <item>99</item>
+
+        <item>abcd</item>
+        <item>23</item>
+        <item>kajsdf</item>
+        <item>99</item>
+    </string-array>
+
 </resources>

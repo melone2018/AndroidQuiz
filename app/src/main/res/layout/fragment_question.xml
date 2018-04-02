@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".QuestionFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-
-        android:id="@+id/TextViewquestion"
+        android:id="@+id/questionTv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="30sp"
-        />
+        android:layout_height="wrap_content"
+        android:text="这是问题名字"
+        android:textSize="30sp" />
 
-</RelativeLayout>
+</LinearLayout>
