@@ -43,10 +43,13 @@ public class QuestionBank {
         userAnswers.add(answer);
     }
 
+    public static Question getCurrentQuestion(){
+        return androidQues.get(questionIndex);
+    }
     public static boolean[] checkAnswers(){
-        boolean[] result = new boolean[];
+        boolean[] result = new boolean[androidQues.size()];
         for(int i = 0; i < androidQues.size(); i++){
-            result[i] = (userAnswers.get(i).equals(androidQues.get(i).getAnswer());
+            result[i] = (userAnswers.get(i).equals(androidQues.get(i).getAnswer()));
         }
         return result;
     }

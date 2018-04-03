@@ -13,11 +13,11 @@
        android:layout_margin="20dp">
 
         <RadioGroup
+            android:onClick="onRadioButtonClicked"
             android:id="@+id/RadioGroupChoice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RadioButton
-                android:onClick="onRadioButtonClicked"
                 android:id="@+id/RadioButtonChoiceA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -25,7 +25,6 @@
                 android:text="dummy1"/>
 
             <RadioButton
-                android:onClick="onRadioButtonClicked"
                 android:id="@+id/RadioButtonChoiceB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,7 +33,6 @@
                 />
 
             <RadioButton
-                android:onClick="onRadioButtonClicked"
                 android:id="@+id/RadioButtonChoiceC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +40,6 @@
                 android:textSize="24sp"/>
 
             <RadioButton
-                android:onClick="onRadioButtonClicked"
                 android:id="@+id/RadioButtonChoiceD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

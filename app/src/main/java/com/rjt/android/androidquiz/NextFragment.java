@@ -5,23 +5,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link NextFragment.OnNextFragmentInteractionListener} interface
- * to handle interaction events.
- */
 public class NextFragment extends Fragment {
     private Button nextBtn;
-    private boolean nextPressed;
-    private OnNextFragmentInteractionListener mListener;
-
+  //  private OnNextFragmentInteractionListener mListener;
+    private static String NEXT_PRESSED_KEY = "NEXT_PRESSED";
     public NextFragment() {
         // Required empty public constructor
     }
@@ -37,49 +31,43 @@ public class NextFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 QuestionBank.incrementIndex();
+                Bundle choiceBundle = getArguments();
+                if(choiceBundle!=null){
+                    String userAnswer = choiceBundle.getString(ChoiceFragment.getRadioButtonKey());
 
-                QuizActivity quizActivity = (QuizActivity)getActivity();
-                ChoiceFragment cfg = (ChoiceFragment)(getFragmentManager().findFragmentByTag(quizActivity.getQChoiceKey()));
-                String answer = cfg.get
+                    QuestionBank.fillUserAnswer(userAnswer);
+                }
                 if(QuestionBank.getQuestionNum()==QuestionBank.getQuestionIndex()){
                     Intent intent = new Intent(getActivity(), ScoreActivity.class);
                     startActivity(intent);
                 }
+//                Bundle questionUpdateBundle = new Bundle();
+//                questionUpdateBundle.putString(NEXT_PRESSED_KEY, true);
+//                FragmentTransaction fgt = getActivity().getSupportFragmentManager().beginTransaction();
+//                QuestionFragment questionFragment = new QuestionFragment();
+//                questionFragment.setArguments();
+
             }
 
         });
         return v;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnNextFragmentInteractionListener) {
-            mListener = (OnNextFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnNextFragmentInteractionListener) {
+//            mListener = (OnNextFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+       // mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnNextFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onNextFragmentInteraction(Uri uri);
-    }
 }

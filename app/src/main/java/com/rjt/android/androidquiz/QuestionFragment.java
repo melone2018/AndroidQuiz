@@ -10,17 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link QuestionFragment.OnQuestionFragmentInteractionListener} interface
- * to handle interaction events.
- */
 public class QuestionFragment extends Fragment {
     View mView;
     private TextView mQuestionView;
-    private OnQuestionFragmentInteractionListener mListener;
+    //private OnQuestionFragmentInteractionListener mListener;
     public QuestionFragment() {
         // Required empty public constructor
     }
@@ -38,6 +31,7 @@ public class QuestionFragment extends Fragment {
 
         mQuestionView.setText(qBundle.getString("InitialQuestion"));
 
+
         return mView;
     }
 
@@ -51,21 +45,21 @@ public class QuestionFragment extends Fragment {
 //        mQuestionView.setText(qBundle.getString("InitialQuestion"));
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnQuestionFragmentInteractionListener) {
-            mListener = (OnQuestionFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnQuestionFragmentInteractionListener");
-        }
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnQuestionFragmentInteractionListener) {
+//            mListener = (OnQuestionFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnQuestionFragmentInteractionListener");
+//        }
+//    }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+       // mListener = null;
     }
 
 //    /**
