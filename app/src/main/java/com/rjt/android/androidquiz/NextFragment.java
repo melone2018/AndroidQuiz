@@ -15,9 +15,14 @@ import android.widget.Button;
 public class NextFragment extends Fragment {
     private Button nextBtn;
   //  private OnNextFragmentInteractionListener mListener;
+    private OnNextClickListener mOnNextClickListener;
     private static String NEXT_PRESSED_KEY = "NEXT_PRESSED";
     public NextFragment() {
         // Required empty public constructor
+    }
+
+    public void setOnNextListener(OnNextClickListener onNextClickListener){
+        this.mOnNextClickListener = onNextClickListener;
     }
 
 
@@ -31,43 +36,21 @@ public class NextFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 QuestionBank.incrementIndex();
-                Bundle choiceBundle = getArguments();
-                if(choiceBundle!=null){
-                    String userAnswer = choiceBundle.getString(ChoiceFragment.getRadioButtonKey());
-
-                    QuestionBank.fillUserAnswer(userAnswer);
-                }
                 if(QuestionBank.getQuestionNum()==QuestionBank.getQuestionIndex()){
                     Intent intent = new Intent(getActivity(), ScoreActivity.class);
                     startActivity(intent);
                 }
-//                Bundle questionUpdateBundle = new Bundle();
-//                questionUpdateBundle.putString(NEXT_PRESSED_KEY, true);
-//                FragmentTransaction fgt = getActivity().getSupportFragmentManager().beginTransaction();
-//                QuestionFragment questionFragment = new QuestionFragment();
-//                questionFragment.setArguments();
-
+                mOnNextClickListener.onNextClick(true);
+                mOnNextClickListener.onNextClickRadioButton(true);
             }
 
         });
         return v;
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnNextFragmentInteractionListener) {
-//            mListener = (OnNextFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-
     @Override
     public void onDetach() {
         super.onDetach();
-       // mListener = null;
     }
 
 }

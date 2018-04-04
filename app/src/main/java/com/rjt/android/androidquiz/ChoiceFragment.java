@@ -54,97 +54,30 @@ public class ChoiceFragment extends Fragment {
         //set up choice data
         String[] initialChoices = getArguments().getStringArray("InitialChoices");
         setText(initialChoices[0], initialChoices[1], initialChoices[2], initialChoices[3]);
-        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            Bundle radioBtnBundle = new Bundle();
+        NextFragment myNextFragment = (NextFragment) getFragmentManager().findFragmentByTag(QuizActivity.getQNextKey());
+        myNextFragment.setOnNextListener(new OnNextClickListener() {
+            @Override
+            public void onNextClick(boolean isClick) {
+
+            }
 
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkId) {
-                //switch (checkId) {
-                RadioButton radioButton = (RadioButton) mView.findViewById(checkId);
-                radioBtnBundle.putString(RADIO_BUTTON_KEY, radioButton.getText().toString());
-                Log.d("ChoiceFragment", "Radio Button chosen");
-//                    case R.id.RadioButtonChoiceA:
-//                        Log.d("ChoiceFragment", "Radio Button A chosen");
-//                        radioBtnBundle.putString(RADIO_BUTTON_KEY, ((RadioButton)findViewById(R.id.RadioButtonChoiceA)).getText().toString());
-//
-//                        // Pirates are the best
-//                        break;
-//                    case R.id.RadioButtonChoiceB:
-//
-//                        Log.d("ChoiceFragment", "Radio Button B chosen");
-//                        radioBtnBundle.putString(RADIO_BUTTON_KEY, ((RadioButton) view).getText().toString());
-//
-//                        break;
-//                    case R.id.RadioButtonChoiceC:
-//
-//                        Log.d("ChoiceFragment", "Radio Button C chosen");
-//                        radioBtnBundle.putString(RADIO_BUTTON_KEY, ((RadioButton) view).getText().toString());
-//                        break;
-//                    case R.id.RadioButtonChoiceD:
-//
-//                        Log.d("ChoiceFragment", "Radio Button D chosen");
-//                        radioBtnBundle.putString(RADIO_BUTTON_KEY, ((RadioButton) view).getText().toString());
-//
-//                        break;
-//                    default:
-//                        break;
+            public void onNextClickRadioButton(boolean isClicked)
+            {
+                mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+                {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkId) {
+                        RadioButton radioButton = group.findViewById(checkId);
+                        String chosenAnswer = radioButton.getText().toString();
+                        QuestionBank.fillUserAnswer(chosenAnswer);
+                    }
+                });
+
             }
         });
+
     }
-
-    public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        Bundle radioBtnBundle = new Bundle();
-
-        switch (view.getId()) {
-            case R.id.RadioButtonChoiceA:
-                if (checked) {
-                    Log.d("ChoiceFragment", "Radio Button A chosen");
-                    radioBtnBundle.putString(RADIO_BUTTON_KEY, ((RadioButton) view).getText().toString());
-                }
-                // Pirates are the best
-                break;
-            case R.id.RadioButtonChoiceB:
-                if (checked) {
-                    Log.d("ChoiceFragment", "Radio Button B chosen");
-                    radioBtnBundle.putString(RADIO_BUTTON_KEY, ((RadioButton) view).getText().toString());
-                }
-                // Ninjas rule
-                break;
-            case R.id.RadioButtonChoiceC:
-                if (checked) {
-                    Log.d("ChoiceFragment", "Radio Button C chosen");
-                    radioBtnBundle.putString(RADIO_BUTTON_KEY, ((RadioButton) view).getText().toString());
-                }
-                break;
-            case R.id.RadioButtonChoiceD:
-                if (checked) {
-                    Log.d("ChoiceFragment", "Radio Button D chosen");
-                    radioBtnBundle.putString(RADIO_BUTTON_KEY, ((RadioButton) view).getText().toString());
-                }
-                break;
-            default:
-                break;
-        }
-        if (checked) {
-            this.setArguments(radioBtnBundle);
-            getFragmentManager().beginTransaction().replace(R.id.fragmentChoice, this);
-        }
-    }
-
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnChoiceFragmentInteractionListener) {
-//            mListener = (OnChoiceFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     @Override
     public void onDetach() {
@@ -152,25 +85,13 @@ public class ChoiceFragment extends Fragment {
         //mListener = null;
     }
 
-//    /**
-//     * This interface must be implemented by activities that contain this
-//     * fragment to allow an interaction in this fragment to be communicated
-//     * to the activity and potentially other fragments contained in that
-//     * activity.
-//     * <p>
-//     * See the Android Training lesson <a href=
-//     * "http://developer.android.com/training/basics/fragments/communicating.html"
-//     * >Communicating with Other Fragments</a> for more information.
-//     */
-//    public interface OnChoiceFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void onChoiceFragmentInteraction(String choiceA, String choiceB, String choiceC, String choiceD);
-//    }
-
     public void setText(String question1, String question2, String question3, String question4) {
+        //mRadioGroup.clearCheck();
         ((RadioButton) mRadioGroup.getChildAt(0)).setText(question1);
         ((RadioButton) mRadioGroup.getChildAt(1)).setText(question2);
         ((RadioButton) mRadioGroup.getChildAt(2)).setText(question3);
         ((RadioButton) mRadioGroup.getChildAt(3)).setText(question4);
+        mRadioGroup.clearCheck();
+
     }
 }

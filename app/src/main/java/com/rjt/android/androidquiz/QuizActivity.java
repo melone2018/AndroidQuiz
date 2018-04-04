@@ -12,10 +12,6 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class QuizActivity extends AppCompatActivity
-//        implements OnQuestionFragmentInteractionListener,
-//        OnChoiceFragmentInteractionListener,
-//        NextFragment.OnNextFragmentInteractionListener
-//
 {
     public static String getQFragmentKey() {
         return QFragmentKey;
@@ -56,6 +52,7 @@ public class QuizActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentQuestion, mQuestionFragment, QFragmentKey).commit();
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentChoice, mChoiceFragment, QChoiceKey).commit();
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentNext, mNextFragment, QNextKey).commit();
+        getSupportFragmentManager().executePendingTransactions();
 
     }
 
@@ -64,22 +61,24 @@ public class QuizActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         initeSetup();
+        NextFragment myNextFragment = (NextFragment) getSupportFragmentManager().findFragmentByTag(QNextKey);
+        myNextFragment.setOnNextListener(new OnNextClickListener()
+        {
+            @Override
+            public void onNextClick(boolean isClick) {
+                Log.i("QuestionBank", Integer.toString(QuestionBank.getQuestionBank().size()));
+                QuestionFragment mQF = (QuestionFragment)getSupportFragmentManager().findFragmentByTag(QFragmentKey);
+                ChoiceFragment mCF = (ChoiceFragment)getSupportFragmentManager().findFragmentByTag(QChoiceKey);
+                mQF.updateQuestion(QuestionBank.getCurrentQuestion().getQuestionText());
+                Question q = QuestionBank.getCurrentQuestion();
+                mCF.setText(q.choices.get(0).toString(), q.choices.get(1).toString(), q.choices.get(2).toString(), q.choices.get(3).toString());
+            }
+
+            @Override
+            public void onNextClickRadioButton(boolean isClicked) {
+
+            }
+        });
     }
 
-//    // update question fragment text view
-//    @Override
-//    public void onQuestionFragmentInteraction(String questionTex) {
-//        QuestionFragment qfg = ((QuestionFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentQuestion));
-//        qfg.updateQuestion(questionTex);
-//    }
-//
-//    @Override
-//    public void onChoiceFragmentInteraction(String choiceA, String choiceB, String choiceC, String choiceD) {
-//        ((ChoiceFragment) getSupportFragmentManager().findFragmentByTag(QChoiceKey)).setText(choiceA, choiceB, choiceC, choiceD);
-//    }
-//
-//    @Override
-//    public void onNextFragmentInteraction(Uri uri) {
-//
-//    }
 }
