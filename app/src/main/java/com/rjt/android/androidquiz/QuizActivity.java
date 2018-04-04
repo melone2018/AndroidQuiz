@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -77,25 +78,27 @@ public class QuizActivity extends AppCompatActivity
                     Log.i("QuestionBank", Integer.toString(QuestionBank.getQuestionBank().size()));
                     QuestionFragment mQF = (QuestionFragment) getSupportFragmentManager().findFragmentByTag(QFragmentKey);
                     ChoiceFragment mCF = (ChoiceFragment) getSupportFragmentManager().findFragmentByTag(QChoiceKey);
-                    String answer = mCF.giveAnswer(mCF.findOutCheckedId());
-                    QuestionBank.fillUserAnswer(answer);
-                    QuestionBank.incrementIndex();
-                    if(QuestionBank.getQuestionNum()==QuestionBank.getQuestionIndex()) {
-                        Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }else {
-                        mQF.updateQuestion(QuestionBank.getCurrentQuestion().getQuestionText());
-                        Question q = QuestionBank.getCurrentQuestion();
-                        mCF.setText(q.choices.get(0).toString(), q.choices.get(1).toString(), q.choices.get(2).toString(), q.choices.get(3).toString());
+                    int buttonCheckedId = mCF.findOutCheckedId();
+                    if(buttonCheckedId==-1){
+                        Toast.makeText(getApplicationContext(), "Please CHoose an Answer", Toast.LENGTH_SHORT).show();
+                    }else{
+                        String answer = mCF.giveAnswer(buttonCheckedId);
+                        QuestionBank.fillUserAnswer(answer);
+                        QuestionBank.incrementIndex();
+                        if(QuestionBank.getQuestionNum()==QuestionBank.getQuestionIndex()) {
+                            Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else {
+                            mCF.unCheckButtons();
+                            mQF.updateQuestion(QuestionBank.getCurrentQuestion().getQuestionText());
+                            Question q = QuestionBank.getCurrentQuestion();
+                            mCF.setText(q.choices.get(0).toString(), q.choices.get(1).toString(), q.choices.get(2).toString(), q.choices.get(3).toString());
+                        }
                     }
+
                 }
             }
-
-//            @Override
-//            public void onNextClickRadioButton(boolean isClicked) {
-//
-//            }
         });
     }
 

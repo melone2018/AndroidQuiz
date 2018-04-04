@@ -34,14 +34,7 @@ public class NextFragment extends Fragment {
         nextBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //QuestionBank.incrementIndex();
-//                if(QuestionBank.getQuestionNum()==QuestionBank.getQuestionIndex()){
-//                    Intent intent = new Intent(getActivity(), ScoreActivity.class);
-//                    startActivity(intent);
-//                }else {
                     mOnNextClickListener.onNextClick(true);
-                    //mOnNextClickListener.onNextClickRadioButton(true);
-               // }
             }
 
         });

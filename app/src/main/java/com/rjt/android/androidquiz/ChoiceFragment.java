@@ -54,28 +54,6 @@ public class ChoiceFragment extends Fragment {
         //set up choice data
         String[] initialChoices = getArguments().getStringArray("InitialChoices");
         setText(initialChoices[0], initialChoices[1], initialChoices[2], initialChoices[3]);
-      //  NextFragment myNextFragment = (NextFragment) getFragmentManager().findFragmentByTag(QuizActivity.getQNextKey());
-//        myNextFragment.setOnNextListener(new OnNextClickListener() {
-//            @Override
-//            public void onNextClick(boolean isClick) {
-//
-//            }
-//
-//            @Override
-//            public void onNextClickRadioButton(boolean isClicked)
-//            {
-//                mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-//                {
-//                    @Override
-//                    public void onCheckedChanged(RadioGroup group, int checkId) {
-//                        RadioButton radioButton = group.findViewById(checkId);
-//                        String chosenAnswer = radioButton.getText().toString();
-//                        QuestionBank.fillUserAnswer(chosenAnswer);
-//                    }
-//                });
-//
-//            }
-//        });
 
     }
 
@@ -92,6 +70,10 @@ public class ChoiceFragment extends Fragment {
 
     public String giveAnswer(int id){
        return ((RadioButton)mView.findViewById(id)).getText().toString();
+    }
+
+    public void unCheckButtons(){
+        mRadioGroup.clearCheck();
     }
 
     public void setText(String question1, String question2, String question3, String question4) {
