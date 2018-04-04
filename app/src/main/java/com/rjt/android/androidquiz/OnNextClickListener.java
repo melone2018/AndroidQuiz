@@ -4,5 +4,5 @@ public interface OnNextClickListener {
 
     void onNextClick(boolean isClick);
 
-    void onNextClickRadioButton(boolean isClicked);
+//    void onNextClickRadioButton(boolean isClicked);
 }

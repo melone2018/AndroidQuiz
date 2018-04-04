@@ -16,7 +16,6 @@ public class NextFragment extends Fragment {
     private Button nextBtn;
   //  private OnNextFragmentInteractionListener mListener;
     private OnNextClickListener mOnNextClickListener;
-    private static String NEXT_PRESSED_KEY = "NEXT_PRESSED";
     public NextFragment() {
         // Required empty public constructor
     }
@@ -35,13 +34,14 @@ public class NextFragment extends Fragment {
         nextBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                QuestionBank.incrementIndex();
-                if(QuestionBank.getQuestionNum()==QuestionBank.getQuestionIndex()){
-                    Intent intent = new Intent(getActivity(), ScoreActivity.class);
-                    startActivity(intent);
-                }
-                mOnNextClickListener.onNextClick(true);
-                mOnNextClickListener.onNextClickRadioButton(true);
+                //QuestionBank.incrementIndex();
+//                if(QuestionBank.getQuestionNum()==QuestionBank.getQuestionIndex()){
+//                    Intent intent = new Intent(getActivity(), ScoreActivity.class);
+//                    startActivity(intent);
+//                }else {
+                    mOnNextClickListener.onNextClick(true);
+                    //mOnNextClickListener.onNextClickRadioButton(true);
+               // }
             }
 
         });

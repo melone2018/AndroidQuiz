@@ -1,5 +1,6 @@
 package com.rjt.android.androidquiz;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
@@ -66,18 +67,35 @@ public class QuizActivity extends AppCompatActivity
         {
             @Override
             public void onNextClick(boolean isClick) {
-                Log.i("QuestionBank", Integer.toString(QuestionBank.getQuestionBank().size()));
-                QuestionFragment mQF = (QuestionFragment)getSupportFragmentManager().findFragmentByTag(QFragmentKey);
-                ChoiceFragment mCF = (ChoiceFragment)getSupportFragmentManager().findFragmentByTag(QChoiceKey);
-                mQF.updateQuestion(QuestionBank.getCurrentQuestion().getQuestionText());
-                Question q = QuestionBank.getCurrentQuestion();
-                mCF.setText(q.choices.get(0).toString(), q.choices.get(1).toString(), q.choices.get(2).toString(), q.choices.get(3).toString());
+                if(QuestionBank.getQuestionNum()==QuestionBank.getQuestionIndex()) {
+                    ChoiceFragment mCF = (ChoiceFragment)getSupportFragmentManager().findFragmentByTag(QChoiceKey);
+                    String answer = mCF.giveAnswer(mCF.findOutCheckedId());
+                    QuestionBank.fillUserAnswer(answer);
+                    Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+                    startActivity(intent);
+                }else {
+                    Log.i("QuestionBank", Integer.toString(QuestionBank.getQuestionBank().size()));
+                    QuestionFragment mQF = (QuestionFragment) getSupportFragmentManager().findFragmentByTag(QFragmentKey);
+                    ChoiceFragment mCF = (ChoiceFragment) getSupportFragmentManager().findFragmentByTag(QChoiceKey);
+                    String answer = mCF.giveAnswer(mCF.findOutCheckedId());
+                    QuestionBank.fillUserAnswer(answer);
+                    QuestionBank.incrementIndex();
+                    if(QuestionBank.getQuestionNum()==QuestionBank.getQuestionIndex()) {
+                        Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else {
+                        mQF.updateQuestion(QuestionBank.getCurrentQuestion().getQuestionText());
+                        Question q = QuestionBank.getCurrentQuestion();
+                        mCF.setText(q.choices.get(0).toString(), q.choices.get(1).toString(), q.choices.get(2).toString(), q.choices.get(3).toString());
+                    }
+                }
             }
 
-            @Override
-            public void onNextClickRadioButton(boolean isClicked) {
-
-            }
+//            @Override
+//            public void onNextClickRadioButton(boolean isClicked) {
+//
+//            }
         });
     }
 

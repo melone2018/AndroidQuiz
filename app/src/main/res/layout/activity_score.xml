@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ScoreActivity">
     <TextView
+        android:id="@+id/TextViewScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:text="Welcome to Score Page!"/>
+        android:textSize="30sp"
+        android:text="Your Scores!"/>
 </RelativeLayout>

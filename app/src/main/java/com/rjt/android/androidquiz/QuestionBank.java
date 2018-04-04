@@ -1,11 +1,13 @@
 package com.rjt.android.androidquiz;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class QuestionBank {
     private static ArrayList<Question> androidQues;
     private static QuestionBank singletonBank;
-    private static ArrayList<String> userAnswers;
+    public static ArrayList<String> userAnswers;
 
     public static int getQuestionIndex() {
         return questionIndex;
@@ -44,6 +46,7 @@ public class QuestionBank {
     }
 
     public static Question getCurrentQuestion(){
+        Log.i("CURRENT INDEX: ", Integer.toString(questionIndex));
         return androidQues.get(questionIndex);
     }
     public static boolean[] checkAnswers(){
